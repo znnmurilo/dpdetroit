@@ -26,6 +26,8 @@ let totalFormTime = 0;
 let pasteAttempts = 0;
 let copyAttempts = 0;
 let suspiciousActivity = [];
+let fullscreenLockActive = false;
+let testInProgress = false;
 
 // Initialize the website
 document.addEventListener('DOMContentLoaded', function() {
@@ -36,7 +38,156 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeScrollEffects();
     initializeAntiCheat();
     initializeTimers();
+    initializeFullscreenLock();
 });
+
+// Fullscreen lock system
+function initializeFullscreenLock() {
+    // Detect beforeunload (user trying to leave page)
+    window.addEventListener('beforeunload', function(e) {
+        if (testInProgress) {
+            logSuspiciousActivity('Tentativa de sair da página', 'page_exit');
+            const message = 'ATENÇÃO: Você está no meio de um teste! Sair da página invalidará seu formulário.';
+            e.preventDefault();
+            e.returnValue = message;
+            return message;
+        }
+    });
+
+    // Detect page focus/blur (clicking outside)
+    window.addEventListener('blur', function() {
+        if (testInProgress) {
+            logSuspiciousActivity('Foco perdido - clicou fora da página', 'focus_lost');
+            showAntiCheatWarning('Não clique fora da página durante o teste!');
+        }
+    });
+
+    // Detect fullscreen changes
+    document.addEventListener('fullscreenchange', function() {
+        if (testInProgress && fullscreenLockActive) {
+            if (!document.fullscreenElement) {
+                logSuspiciousActivity('Saiu do modo fullscreen', 'fullscreen_exit');
+                forceFullscreen();
+                showAntiCheatWarning('Modo fullscreen é obrigatório durante o teste!');
+            }
+        }
+    });
+
+    // Detect ESC key (commonly used to exit fullscreen)
+    document.addEventListener('keydown', function(e) {
+        if (testInProgress && e.key === 'Escape') {
+            e.preventDefault();
+            logSuspiciousActivity('Tentativa de pressionar ESC', 'escape_key');
+            showAntiCheatWarning('Tecla ESC é bloqueada durante o teste!');
+            return false;
+        }
+        
+        // Block Alt+Tab
+        if (testInProgress && e.altKey && e.key === 'Tab') {
+            e.preventDefault();
+            logSuspiciousActivity('Tentativa de Alt+Tab', 'alt_tab');
+            showAntiCheatWarning('Alt+Tab é bloqueado durante o teste!');
+            return false;
+        }
+        
+        // Block Windows key
+        if (testInProgress && (e.key === 'Meta' || e.key === 'OS')) {
+            e.preventDefault();
+            logSuspiciousActivity('Tentativa de usar tecla Windows', 'windows_key');
+            showAntiCheatWarning('Tecla Windows é bloqueada durante o teste!');
+            return false;
+        }
+    });
+
+    // Force focus back to page if lost
+    setInterval(function() {
+        if (testInProgress && !document.hasFocus()) {
+            window.focus();
+        }
+    }, 1000);
+}
+
+function forceFullscreen() {
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(err => {
+            console.warn('Erro ao entrar em fullscreen:', err);
+        });
+    } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) {
+        document.documentElement.msRequestFullscreen();
+    }
+}
+
+function startTestMode() {
+    testInProgress = true;
+    fullscreenLockActive = true;
+    
+    // Force fullscreen
+    forceFullscreen();
+    
+    // Show test mode warning
+    showTestModeWarning();
+    
+    // Disable context menu more aggressively
+    document.addEventListener('contextmenu', preventDefaultAction, true);
+    document.addEventListener('selectstart', preventDefaultAction, true);
+    document.addEventListener('dragstart', preventDefaultAction, true);
+}
+
+function endTestMode() {
+    testInProgress = false;
+    fullscreenLockActive = false;
+    
+    // Exit fullscreen
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+    }
+    
+    // Re-enable normal interactions
+    document.removeEventListener('contextmenu', preventDefaultAction, true);
+    document.removeEventListener('selectstart', preventDefaultAction, true);
+    document.removeEventListener('dragstart', preventDefaultAction, true);
+}
+
+function preventDefaultAction(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+}
+
+function showTestModeWarning() {
+    const warning = document.createElement('div');
+    warning.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+        color: white;
+        padding: 15px;
+        z-index: 10000;
+        font-weight: bold;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        border-bottom: 3px solid #b91c1c;
+    `;
+    warning.innerHTML = `
+        <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
+        <strong>MODO TESTE ATIVO:</strong> Tela cheia obrigatória • Não saia da página • Todas as ações são monitoradas
+        <i class="fas fa-shield-alt" style="margin-left: 10px;"></i>
+    `;
+    
+    document.body.appendChild(warning);
+    
+    setTimeout(() => {
+        warning.remove();
+    }, 5000);
+}
 
 // Anti-cheat initialization
 function initializeAntiCheat() {
@@ -282,6 +433,9 @@ function openModal() {
     resetForm();
     startTotalTimer();
     startQuestionTimer();
+    
+    // Start test mode with fullscreen lock
+    startTestMode();
 }
 
 function closeModal() {
@@ -289,6 +443,9 @@ function closeModal() {
     document.body.style.overflow = 'auto';
     totalStartTime = null;
     questionStartTime = null;
+    
+    // End test mode
+    endTestMode();
 }
 
 // Form functionality
@@ -768,6 +925,10 @@ function resetForm() {
     pasteAttempts = 0;
     copyAttempts = 0;
     suspiciousActivity = [];
+    
+    // Reset test mode variables
+    testInProgress = false;
+    fullscreenLockActive = false;
     
     // Reset modal content if it was changed
     if (document.querySelector('.success-message') || document.querySelector('.error-message')) {
