@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPD - Recrutamento de Conscritos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Anti-copy/paste script -->
+    <script>
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Disable F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S, Ctrl+A, Ctrl+C, Ctrl+V
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && (e.key === 'U' || e.key === 'S' || e.key === 'A' || 
+                              e.key === 'C' || e.key === 'V' || e.key === 'X' ||
+                              e.shiftKey && e.key === 'I'))) {
+                e.preventDefault();
+                return false;
+            }
+        });
+        
+        // Disable text selection
+        document.addEventListener('selectstart', function(e) {
+            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                e.preventDefault();
+                return false;
+            }
+        });
+        
+        // Disable drag
+        document.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            return false;
+        });
+    </script>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>DPD - Recrutamento de Conscritos</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">Sobre</a>
+                <a href="#requirements" class="nav-link">Requisitos</a>
+                <a href="#process" class="nav-link">Processo</a>
+            </div>
+            <button class="enroll-btn" id="enrollBtn">
+                <i class="fas fa-user-plus"></i>
+                INSCREVER-SE AGORA
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="animated-bg"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="title-line">DETROIT POLICE</span>
+                    <span class="title-line">DEPARTMENT</span>
+                    <span class="title-line">RECRUITMENT</span>
+                </h1>
+                <p class="hero-subtitle">Proteja e Sirva - Junte-se à Elite Policial</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Oficiais Ativos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">28%</span>
+                        <span class="stat-label">Taxa de Aprovação</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">+1000</span>
+                        <span class="stat-label">Boletins de Ocorrência</span>
+                    </div>
+                </div>
+                <button class="cta-button" id="ctaBtn">
+                    <span>COMECE SUA CARREIRA</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Sobre o DPD</h2>
+                <p class="section-subtitle">Tradição, Honra e Comprometimento com a Segurança</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="about-card">
+                        <div class="card-icon">
+                            <i class="fas fa-shield-check"></i>
+                        </div>
+                        <h3>Missão</h3>
+                        <p>Proteger e servir a comunidade de Detroit com integridade, profissionalismo e dedicação, mantendo a ordem e garantindo a segurança de todos os cidadãos.</p>
+                    </div>
+                    
+                    <div class="about-card">
+                        <div class="card-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>Visão</h3>
+                        <p>Ser reconhecido como o departamento de polícia mais respeitado e eficiente, formando oficiais de excelência que fazem a diferença na vida das pessoas.</p>
+                    </div>
+                    
+                    <div class="about-card">
+                        <div class="card-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Valores</h3>
+                        <p>Integridade, coragem, respeito, responsabilidade e comprometimento são os pilares que guiam cada ação de nossos oficiais no cumprimento do dever.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Requirements Section -->
+    <section id="requirements" class="requirements-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Requisitos para Conscritos</h2>
+                <p class="section-subtitle">Critérios Essenciais para Ingressar no DPD</p>
+            </div>
+            
+            <div class="requirements-content">
+                <div class="requirement-warning">
+                    <div class="warning-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>ATENÇÃO: Requisitos Obrigatórios</h3>
+                    <p>Todos os requisitos abaixo são <strong>OBRIGATÓRIOS</strong> e serão rigorosamente verificados. O não cumprimento de qualquer um deles resultará na eliminação automática do processo seletivo.</p>
+                </div>
+                
+                <div class="requirements-grid">
+                    <div class="requirement-card">
+                        <div class="req-icon">
+                            <i class="fas fa-birthday-cake"></i>
+                        </div>
+                        <h4>Idade Mínima</h4>
+                        <p>Ter no mínimo <strong>18 anos completos</strong></p>
+                    </div>
+                    
+                    <div class="requirement-card">
+                        <div class="req-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4>Estudado</h4>
+                        <p>Venha devidamente estudado <strong>conforme o material fornecido</strong></p>
+                    </div>
+                    
+                    <div class="requirement-card">
+                        <div class="req-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Antecedentes</h4>
+                        <p><strong>Ficha criminal limpa</strong></p>
+                    </div>
+                    
+                    <div class="requirement-card">
+                        <div class="req-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h4>Aptidão Física</h4>
+                        <p>Boa <strong>condição física e mental</strong></p>
+                    </div>
+                    
+                    <div class="requirement-card">
+                        <div class="req-icon">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <h4>Documentação</h4>
+                        <p>Documentos <strong>válidos e atualizados</strong></p>
+                    </div>
+                    
+                    <div class="requirement-card">
+                        <div class="req-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4>Comprometimento</h4>
+                        <p><strong>Dedicação integral</strong> ao serviço público</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="process-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Processo Seletivo</h2>
+                <p class="section-subtitle">Etapas para se Tornar um Oficial DPD</p>
+            </div>
+            
+            <div class="process-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-content">
+                        <h3>Inscrição </h3>
+                        <p>Preenchimento do formulário de candidatura com avaliação técnica completa.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-content">
+                        <h3>Análise Documental</h3>
+                        <p>Verificação de todos os documentos e requisitos básicos para a candidatura.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <div class="timeline-content">
+                        <h3>Avaliação Psicológica</h3>
+                        <p>Testes psicológicos para verificar aptidão mental e emocional para a função.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-number">4</div>
+                    <div class="timeline-content">
+                        <h3>Exame Físico</h3>
+                        <p>Avaliação da condição física e capacidade para exercer as atividades policiais.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-number">5</div>
+                    <div class="timeline-content">
+                        <h3>Treinamento</h3>
+                        <p>Curso de formação policial com duração de 7 dias na academia DPD.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Detroit Police Department</h3>
+                    <p>Protegendo e Servindo Detroit</p>
+                    <p>Orgulho de ser DPD</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Nossa Missão</h3>
+                    <p><i class="fas fa-shield-alt"></i> Proteger os cidadãos</p>
+                    <p><i class="fas fa-balance-scale"></i> Manter a justiça</p>
+                    <p><i class="fas fa-handshake"></i> Servir com integridade</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Excelência</h3>
+                    <p><i class="fas fa-star"></i> Padrão DPD de qualidade</p>
+                    <p><i class="fas fa-trophy"></i> Tradição e honra</p>
+                    <p><i class="fas fa-medal"></i> Formação de elite</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Detroit Police Department. All rights reserved.</p>
+                <p>&copy; Desenvolvido por (LABUBU) All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="applicationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-clipboard-check"></i> Formulário de Recrutamento DPD</h2>
+                <span class="close">&times;</span>
+            </div>
+            
+            <!-- Timer Display -->
+            <div class="timer-display">
+                <div class="total-timer">
+                    <i class="fas fa-clock"></i>
+                    <span>Tempo Total: </span>
+                    <span id="totalTimer">00:00:00</span>
+                </div>
+                <div class="question-timer">
+                    <i class="fas fa-stopwatch"></i>
+                    <span>Tempo da Pergunta: </span>
+                    <span id="questionTimer">00:00</span>
+                </div>
+            </div>
+            
+            <form class="application-form" id="applicationForm">
+                <div class="form-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span class="progress-text">0% Completo</span>
+                </div>
+
+                <div class="form-section active" data-section="1">
+                    <h3>Informações Pessoais</h3>
+                    <div class="form-group">
+                        <label for="nome_completo">Qual seu nome completo? *</label>
+                        <input type="text" id="nome_completo" name="nome_completo" required class="no-paste">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="idade">Sua idade? *</label>
+                        <input type="number" id="idade" name="idade" min="18" max="65" required class="no-paste">
+                    </div>
+                </div>
+
+                <div class="form-section" data-section="2">
+                    <h3>Experiência Prévia</h3>
+                    <div class="form-group">
+                        <label for="experiencia_policial">Já teve experiência como policial? *</label>
+                        <textarea id="experiencia_policial" name="experiencia_policial" required class="no-paste" placeholder="Descreva detalhadamente sua experiência anterior ou escreva 'Não' se não possui"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section" data-section="3">
+                    <h3>Conhecimentos Técnicos - Códigos Q</h3>
+                    <div class="form-group">
+                        <label for="codigos_q">Liste 10 códigos Q utilizados na comunicação policial e seus significados: *</label>
+                        <textarea id="codigos_q" name="codigos_q" required class="no-paste" placeholder="Exemplo: QSL - Confirmo recebimento"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section" data-section="4">
+                    <h3>Códigos de Patrulha</h3>
+                    <div class="form-group">
+                        <label for="codigos_patrulha">Explique os códigos de patrulha do 1 ao 6 e suas aplicações: *</label>
+                        <textarea id="codigos_patrulha" name="codigos_patrulha" required class="no-paste" placeholder="Código 1: ... Código 2: ... etc."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section" data-section="5">
+                    <h3>Códigos de Abordagem</h3>
+                    <div class="form-group">
+                        <label for="codigos_abordagem">Descreva os códigos de abordagem do 1 ao 3 e quando utilizá-los: *</label>
+                        <textarea id="codigos_abordagem" name="codigos_abordagem" required class="no-paste" placeholder="Código 1: ... Código 2: ... Código 3: ..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section" data-section="6">
+                    <h3>Funções Operacionais</h3>
+                    <div class="form-group">
+                        <label for="funcoes_p1_p2_p3">Explique as funções P1, P2 e P3 em uma operação policial: *</label>
+                        <textarea id="funcoes_p1_p2_p3" name="funcoes_p1_p2_p3" required class="no-paste" placeholder="P1: ... P2: ... P3: ..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section" data-section="7">
+                    <h3>Simulação de Comunicação 1</h3>
+                    <div class="form-group">
+                        <label for="modulacao_codigo_0">Simule uma modulação de código 0: *</label>
+                        <textarea id="modulacao_codigo_0" name="modulacao_codigo_0" required class="no-paste" placeholder="Descreva como você faria a comunicação via rádio para um código 0"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section" data-section="8">
+                    <h3>Simulação de Comunicação 2</h3>
+                    <div class="form-group">
+                        <label for="modulacao_acompanhamento">Simule uma modulação de iniciando acompanhamento a um veículo se evadindo de uma QRU de disparos: *</label>
+                        <textarea id="modulacao_acompanhamento" name="modulacao_acompanhamento" required class="no-paste" placeholder="Descreva a comunicação completa via rádio para esta situação"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section" data-section="9">
+                    <h3>Procedimentos de Revista</h3>
+                    <div class="form-group">
+                        <label for="procedimentos_revista">Se você precisa realizar uma revista num cidadão, quais são os procedimentos? *</label>
+                        <textarea id="procedimentos_revista" name="procedimentos_revista" required class="no-paste" placeholder="Descreva passo a passo os procedimentos corretos"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section" data-section="10">
+                    <h3>Ética Policial</h3>
+                    <div class="form-group">
+                        <label for="corrupcao_providencias">Se você vê um policial praticando corrupção, quais as providências que você irá tomar? *</label>
+                        <textarea id="corrupcao_providencias" name="corrupcao_providencias" required class="no-paste" placeholder="Descreva as ações que tomaria nesta situação"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section" data-section="11">
+                    <h3>Uso da Força</h3>
+                    <div class="form-group">
+                        <label for="agressao_providencia">Um indivíduo começa a te agredir sem motivo, e você está em serviço e devidamente armado. Qual sua providência? *</label>
+                        <textarea id="agressao_providencia" name="agressao_providencia" required class="no-paste" placeholder="Descreva qual seria sua reação e procedimentos"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section" data-section="12">
+                    <h3>Conhecimento da Lei</h3>
+                    <div class="form-group">
+                        <label for="direitos_miranda">Recite os direitos Miranda que devem ser lidos durante uma prisão: *</label>
+                        <textarea id="direitos_miranda" name="direitos_miranda" required class="no-paste" placeholder="'Você tem o direito...'"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section" data-section="13">
+                    <h3>Situações de Emergência</h3>
+                    <div class="form-group">
+                        <label for="backup_situacao">Descreva quando e como solicitar backup durante uma operação: *</label>
+                        <textarea id="backup_situacao" name="backup_situacao" required class="no-paste" placeholder="Situações que requerem backup e procedimento de solicitação"></textarea>
+                    </div>
+                </div>
+
+
+
+                <div class="form-navigation">
+                    <button type="button" class="btn-secondary" id="prevBtn" style="display: none;">Anterior</button>
+                    <button type="button" class="btn-primary" id="nextBtn">Próximo</button>
+                    <button type="submit" class="btn-primary" id="submitBtn" style="display: none;">Enviar Candidatura</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
